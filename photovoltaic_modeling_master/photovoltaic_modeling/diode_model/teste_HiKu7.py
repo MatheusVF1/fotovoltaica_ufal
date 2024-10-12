@@ -2,6 +2,7 @@ from single_diode_model import SingleDiodeModel
 import report_helper as report_helper
 from table_data import obter_dados_data_hora, calcular_angulos_irradiancia
 from curves_plot import gerar_curvas
+import numpy as np
 
 # Dados do módulo solar HiKu7 Mono PERC 605 W
 short_circuit_current = 18.52  # [A]
@@ -66,6 +67,20 @@ if dados_hora is not None:
 
     # Chama a função para gerar as curvas de tensão, corrente e potência
     gerar_curvas(single_diode_model)
+
+    # printar quantidade de paineis que devem ser utilizados
+    potencia_gerada_modulo = max(single_diode_model.powers)  # Potência máxima gerada pelo módulo fotovoltaico
+    potencia_desejada = dados_hora['Potencia_FV_Avg']  # Potência desejada obtida da tabela
+
+    if potencia_gerada_modulo > 0:
+        quantidade_paineis = potencia_desejada / potencia_gerada_modulo
+        quantidade_paineis = np.ceil(quantidade_paineis)  # Arredonda para o próximo número inteiro
+        print(f"Potência desejada: {potencia_desejada:.2f} W")
+        print(f"Potência gerada por módulo: {potencia_gerada_modulo:.2f} W")
+        print(f"Quantidade de painéis necessários: {int(quantidade_paineis)}")
+    else:
+        print("A potência gerada pelo módulo é zero ou negativa.")
+    
 
 else:
     print("Dados não encontrados para a data e hora selecionadas.")
