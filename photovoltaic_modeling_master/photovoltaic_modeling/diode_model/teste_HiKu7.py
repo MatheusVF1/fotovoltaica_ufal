@@ -28,12 +28,13 @@ if dados_hora is not None:
     actual_irradiance = dados_hora['Radiação']  # Irradiância obtida da tabela
 
     print("Temperatura (ºC)", dados_hora['Temp_Cel'])
+
     print("Irradiancia ", actual_irradiance)
     
     # Exemplo de cálculos com base nos dados obtidos
     angulos_irradiancia = calcular_angulos_irradiancia(
-        data_hora_str="21/03/2019 12:00",
-        irradiancia_global=dados_hora['Radiação'],
+        data_hora_str= "21/03/2019 12:00",
+        irradiancia_global= dados_hora['Radiação'],
         beta = 0, # Inclinação do painel em relação ao plano horizontal (exemplo)
         gamma_p = 0, # Angulação do painel em relação ao norte ou sul
         lat = -9.55766947266527, # Latitude da localização (exemplo)
@@ -59,7 +60,7 @@ if dados_hora is not None:
     )
     
     # Calculando os parâmetros baseados na irradiância e temperatura da tabela
-    single_diode_model.calculate(operating_temperature, actual_irradiance)
+    single_diode_model.calculate(operating_temperature, angulos_irradiancia['Irradiância Incidente'])
     
     # Gerando relatórios e gráficos para o modelo
     report_helper.write_result_to_csv_file(single_diode_model, 'single_diode_model_hiku7_605W')
