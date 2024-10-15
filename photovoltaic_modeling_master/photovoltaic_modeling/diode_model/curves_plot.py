@@ -2,25 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def gerar_curvas(single_diode_model):
-    # Pegando os valores de tensão e corrente do modelo
-    voltages = single_diode_model.voltages
-    currents = single_diode_model.currents
-    powers = single_diode_model.powers
-
-    # Encontrando o índice do ponto de máxima potência
-    idx_max_power = np.argmax(powers)
-    Vp = voltages[idx_max_power]  # Tensão no ponto de máxima potência (Maximum Power Point - MPP)
-    Ip = currents[idx_max_power]  # Corrente no ponto de máxima potência
-
-    print(f"Tensão no MPP: {Vp} V")
-    print(f"Corrente no MPP: {Ip} A")
-    print("--------------------------")
-    print("--------------------------")
-
     # Definindo variáveis
     f = 60  # Frequência da rede
     w = 2 * np.pi * f
     t = np.linspace(0, 2 * (1 / f), 200)
+
+    potRede = 220 * 17.25 # Corrende máxima do painel
+    Vp = 220 * np.sqrt(2)
+    Ip = (potRede*2) / Vp
 
     # Tensão e corrente (usando valores de pico)
     vt = Vp * np.cos(w * t)  # Tensão como função do tempo
