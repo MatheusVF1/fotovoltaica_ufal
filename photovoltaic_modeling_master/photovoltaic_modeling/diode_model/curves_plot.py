@@ -9,7 +9,7 @@ def gerar_curvas(single_diode_model):
 
     potRede = 220 * 17.25 # Corrende máxima do painel
     Vp = 220 * np.sqrt(2)
-    Ip = (potRede*2) / Vp
+    Ip = (4300*2) / Vp
 
     # Tensão e corrente (usando valores de pico)
     vt = Vp * np.cos(w * t)  # Tensão como função do tempo
