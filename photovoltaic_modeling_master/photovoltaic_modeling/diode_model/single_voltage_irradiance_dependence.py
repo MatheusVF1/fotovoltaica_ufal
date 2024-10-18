@@ -53,7 +53,7 @@ class SingleVoltageIrradianceDependence(object):
 
         x = unknown_voltage
 
-        # Based on equation (23) of [1]:
-        # In the form "... = 0"
+        # Baseado na equação (23) of [1]:
+        # No formato "... = 0"
         # meth.log is natural logarithm:
         return log((self.iph() * self.rsh() - x) / (self.io() * self.rsh())) * self.ns() * self.vt() - x
