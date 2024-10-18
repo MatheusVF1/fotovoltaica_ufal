@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Carregar a planilha
-df = pd.read_excel(r'C:\Users\Matheus Vieira\Documents\VSCODE-Workspace\photovoltaic_modeling_python-master\radiacao.xlsx')
+df = pd.read_excel(r'C:\Users\mathe\Documents\VSCODE-Workspace\photovoltaic_modeling_master\radiacao.xlsx')
 
 # Convertendo a coluna 'Data_Hora' para datetime, inferindo o formato e usando dayfirst=True
 df['Data_Hora'] = pd.to_datetime(df['Data_Hora'], dayfirst=True, errors='coerce')
@@ -14,6 +15,7 @@ colunas_numericas = ['Radiação', 'Temp_Cel', 'Temp_Amb', 'Tensao_S1_Avg', 'Cor
 
 for coluna in colunas_numericas:
     df[coluna] = df[coluna].astype(str).str.replace(',', '.').astype(float)
+
 
 # Função para obter dados de temperatura e irradiância da planilha
 def obter_dados_data_hora(data_selecionada, hora_selecionada):
@@ -83,4 +85,3 @@ def calcular_angulos_irradiancia(data_hora_str, irradiancia_global, beta, gamma_
         "Ângulo de Incidência": theta_i,
         "Irradiância Incidente": G_inc
     }
-
