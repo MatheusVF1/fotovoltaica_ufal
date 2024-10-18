@@ -188,4 +188,3 @@ class MultipleModulesSingleDiodeModel(object):
 
         for index in range(len(self.voltages)):
             self.powers.append(self.voltages[index] * self.currents[index])
-
